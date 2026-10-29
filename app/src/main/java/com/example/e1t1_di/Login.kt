@@ -1,5 +1,6 @@
 package com.example.e1t1_di
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -12,6 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -96,8 +100,8 @@ fun Login(
                     .width(344.dp)
                     .height(27.dp),
 
-            )
-
+                )
+            //Frame 5
             Column(
                 verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
                 horizontalAlignment = Alignment.End,
@@ -107,8 +111,9 @@ fun Login(
             ) {
                 OutlinedTextField(
                     modifier = Modifier
-                    .width(344.dp)
-                    .height(54.dp),
+                        .width(344.dp)
+                        .height(54.dp)
+                        .border(2.5.dp, Color(0xFF000000), RoundedCornerShape(size = 12.dp)),
                     value = postaElektronikoa,
                     onValueChange = { postaElektronikoa = it },
                     shape = RoundedCornerShape(size = 12.dp),
@@ -117,20 +122,97 @@ fun Login(
                             text = "Posta elektronikoa",
                             fontSize = 14.sp,
                             fontWeight = FontWeight(400),
-                            color = Color(0xFF888888),
-                            modifier = Modifier
-                                .width(127.48235.dp)
-                                .height(17.dp)
-                            )
+                            color = Color(0xFF888888)
+                        )
                     }
                 )
-
+                OutlinedTextField(
+                    modifier = Modifier
+                        .width(344.dp)
+                        .height(54.dp)
+                        .border(2.5.dp, Color(0xFF000000), RoundedCornerShape(size = 12.dp)),
+                    value = pasahitza,
+                    onValueChange = { pasahitza = it },
+                    shape = RoundedCornerShape(size = 12.dp),
+                    placeholder = {
+                        Text(
+                            text = "Pasahitza",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFF888888),
+                        )
+                    }
+                )
             }
 
+            //Frame 7
+            Column(
+                verticalArrangement = Arrangement.spacedBy(30.dp, Alignment.Top),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .width(344.dp)
+                    .height(164.dp)
+            ) {
+                //Frame 6
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(25.dp, Alignment.Top),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .width(344.dp)
+                        .height(164.dp)
+                ) {
+                    Button(
+                        onClick = { onLoginSuccess() },
+                        shape = RoundedCornerShape(30.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5E7F5C)),
+                        border = BorderStroke(3.dp, Color.Black),
+                        modifier = Modifier
+                            .width(344.dp)
+                            .height(52.dp)
+                    ) {
+                        Text(
+                            text = "SARTU",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFFFFFDF3),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+
+                    //Frame 3
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(0.dp, Alignment.Top),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .width(344.dp)
+                            .height(10.dp)
+                    ) {
+                        Text(
+                            text = "edo",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFF777777),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .width(344.dp)
+                                .height(10.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.vector),
+                            contentDescription = "image description",
+                            contentScale = ContentScale.None,
+                            modifier = Modifier
+                                .border(width = 1.5.dp, color = Color(0xFFBBBBBB))
+                                .padding(1.5.dp)
+                                .width(340.dp)
+                                .height(0.dp)
+                                .background(color = Color(0xFF000000))
+                        )
+                    }
+                }
+            }
         }
     }
-
-
 }
 
 
