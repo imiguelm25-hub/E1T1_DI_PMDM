@@ -10,13 +10,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -30,23 +27,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.e1t1_di.ui.theme.E1T1_DITheme
-import java.time.format.TextStyle
 
 @Composable
-fun Login(
-    onLoginSuccess: () -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun Login(onLoginSuccess: () -> Unit, modifier: Modifier = Modifier) {
     var postaElektronikoa by remember { mutableStateOf("") }
     var pasahitza by remember { mutableStateOf("") }
+    var errorea by remember { mutableStateOf(false) }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(42.dp, Alignment.Top),
@@ -57,6 +49,7 @@ fun Login(
             .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 50.dp))
             .padding(start = 25.dp, top = 50.dp, end = 25.dp, bottom = 113.dp)
     ) {
+
         //Gezia
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -65,6 +58,7 @@ fun Login(
                 .width(362.dp)
                 .height(44.dp)
         ) {
+
             Image(
                 painter = painterResource(id = R.drawable.botoia),
                 contentDescription = "Atzera",
@@ -75,6 +69,7 @@ fun Login(
                     .height(44.dp)
             )
         }
+
         Column(
             verticalArrangement = Arrangement.spacedBy(30.dp, Alignment.Top),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -82,6 +77,7 @@ fun Login(
                 .width(344.dp)
                 .height(518.dp)
         ) {
+
             //Logoa
             Image(
                 painter = painterResource(id = R.drawable.logo),
@@ -91,6 +87,7 @@ fun Login(
                     .width(156.dp)
                     .height(109.dp)
             )
+
             //Saioa hasi
             Text(
                 text = "SAIOA HASI",
@@ -103,14 +100,17 @@ fun Login(
                     .height(27.dp),
 
                 )
+
             //Frame 5
             Column(
                 verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
-                horizontalAlignment = Alignment.End,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .width(344.dp)
                     .height(128.dp)
             ) {
+
+                //Posta elektronikoa
                 OutlinedTextField(
                     modifier = Modifier
                         .width(344.dp)
@@ -128,6 +128,8 @@ fun Login(
                         )
                     }
                 )
+
+                //Pasahitza
                 OutlinedTextField(
                     modifier = Modifier
                         .width(344.dp)
@@ -145,6 +147,15 @@ fun Login(
                         )
                     }
                 )
+
+                //Logina zuzena ez bada, errore mezua agertzen da
+                if (errorea) {
+                    Text(
+                        text = "Posta elektronikoa edo pasahitza okerra",
+                        color = Color.Red,
+                        fontSize = 12.sp
+                    )
+                }
             }
 
             //Frame 7
@@ -162,7 +173,14 @@ fun Login(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Button(
-                        onClick = { onLoginSuccess() },
+                        onClick = {
+                            if (postaElektronikoa.trim() == "admin@gmail.com" && pasahitza == "admin123") {
+                                errorea = false
+                                onLoginSuccess()
+                            } else {
+                                errorea = true
+                            }
+                        },
                         shape = RoundedCornerShape(30.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5E7F5C)),
                         border = BorderStroke(3.dp, Color.Black),
@@ -186,7 +204,7 @@ fun Login(
                     ) {
                         Box(
                             modifier = Modifier
-                                .weight(1f)                       // ocupa la mitad del espacio libre
+                                .weight(1f)
                                 .height(1.5.dp)
                                 .background(Color(0xFFBBBBBB))
                         )
@@ -195,7 +213,7 @@ fun Login(
                             fontSize = 11.sp,
                             fontWeight = FontWeight(400),
                             color = Color(0xFF777777),
-                            modifier = Modifier.padding(horizontal = 12.dp)    // separa el texto de las líneas
+                            modifier = Modifier.padding(horizontal = 12.dp)
                         )
                         Box(
                             modifier = Modifier
@@ -205,8 +223,9 @@ fun Login(
                         )
                     }
 
+                    //Gonbidatu botoia
                     Button(
-                        onClick = {  },
+                        onClick = { onLoginSuccess() },
                         shape = RoundedCornerShape(30.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFBEA)),
                         border = BorderStroke(3.dp, Color.Black),
@@ -223,13 +242,11 @@ fun Login(
                         )
                     }
 
-
                 }
             }
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

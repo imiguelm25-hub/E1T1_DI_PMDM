@@ -17,9 +17,13 @@ fun AppNabigazio (modifier: Modifier = Modifier){
     ) {
         composable("login") {
             Login(
-                onLoginSuccess = {navController.navigate("home")}
+                onLoginSuccess = {
+                    navController.navigate("menua")
+                }
             )
         }
+        composable("menua") {
+            Menua(onBack = { navController.popBackStack() })
+        }
     }
-
 }
