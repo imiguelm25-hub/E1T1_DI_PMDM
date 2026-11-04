@@ -41,34 +41,12 @@ fun Login(onLoginSuccess: () -> Unit, modifier: Modifier = Modifier) {
     var errorea by remember { mutableStateOf(false) }
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(42.dp, Alignment.Top),
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .width(412.dp)
             .height(917.dp)
             .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 50.dp))
-            .padding(start = 25.dp, top = 50.dp, end = 25.dp, bottom = 113.dp)
+            .padding(start = 25.dp, top = 150.dp, end = 25.dp, bottom = 113.dp)
     ) {
-
-        //Gezia
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .width(362.dp)
-                .height(44.dp)
-        ) {
-
-            Image(
-                painter = painterResource(id = R.drawable.botoia),
-                contentDescription = "Atzera",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .padding(0.dp)
-                    .width(46.8.dp)
-                    .height(44.dp)
-            )
-        }
 
         Column(
             verticalArrangement = Arrangement.spacedBy(30.dp, Alignment.Top),
