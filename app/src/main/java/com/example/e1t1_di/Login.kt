@@ -5,8 +5,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -157,9 +159,7 @@ fun Login(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(25.dp, Alignment.Top),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .width(344.dp)
-                        .height(164.dp)
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Button(
                         onClick = { onLoginSuccess() },
@@ -167,7 +167,7 @@ fun Login(
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5E7F5C)),
                         border = BorderStroke(3.dp, Color.Black),
                         modifier = Modifier
-                            .width(344.dp)
+                            .fillMaxWidth()
                             .height(52.dp)
                     ) {
                         Text(
@@ -180,35 +180,50 @@ fun Login(
                     }
 
                     //Frame 3
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(0.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .width(344.dp)
-                            .height(10.dp)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
                     ) {
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)                       // ocupa la mitad del espacio libre
+                                .height(1.5.dp)
+                                .background(Color(0xFFBBBBBB))
+                        )
                         Text(
                             text = "edo",
                             fontSize = 11.sp,
                             fontWeight = FontWeight(400),
                             color = Color(0xFF777777),
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .width(344.dp)
-                                .height(10.dp)
+                            modifier = Modifier.padding(horizontal = 12.dp)    // separa el texto de las líneas
                         )
-                        Image(
-                            painter = painterResource(id = R.drawable.vector),
-                            contentDescription = "image description",
-                            contentScale = ContentScale.None,
+                        Box(
                             modifier = Modifier
-                                .border(width = 1.5.dp, color = Color(0xFFBBBBBB))
-                                .padding(1.5.dp)
-                                .width(340.dp)
-                                .height(0.dp)
-                                .background(color = Color(0xFF000000))
+                                .weight(1f)
+                                .height(1.5.dp)
+                                .background(Color(0xFFBBBBBB))
                         )
                     }
+
+                    Button(
+                        onClick = {  },
+                        shape = RoundedCornerShape(30.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFBEA)),
+                        border = BorderStroke(3.dp, Color.Black),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(52.dp)
+                    ) {
+                        Text(
+                            text = "GONBIDATU GISA JARRAITU",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF000000),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+
+
                 }
             }
         }
