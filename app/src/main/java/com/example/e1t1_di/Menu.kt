@@ -1,17 +1,18 @@
 package com.example.e1t1_di
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -126,8 +127,43 @@ fun Menua(
                     .height(200.dp)
             )
         }
-        //Frame9
+        //Frame39
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = {},
+                shape = RoundedCornerShape(20.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5E7F5C)),
+                border = BorderStroke(3.dp, Color.Black),
+                modifier = Modifier
+                    .width(222.dp)
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "EKITALDI GUZTIAK",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight(700),
+                    color = Color(0xFFFFFFFF),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .width(186.dp)
+                        .height(24.dp)
+                )
+            }
+        }
 
+        //Frame9
+        Column(
+            verticalArrangement = Arrangement.spacedBy(13.dp, Alignment.Top),
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier
+                .width(343.dp)
+                .height(377.dp)
+        ) {
+            // Child views.
+        }
     }
 }
 
