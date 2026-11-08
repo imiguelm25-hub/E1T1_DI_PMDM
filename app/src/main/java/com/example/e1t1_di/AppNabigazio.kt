@@ -12,9 +12,12 @@ fun AppNabigazio (modifier: Modifier = Modifier){
 
     NavHost(
         navController = navController,
-        startDestination = "login",
+        startDestination = "ekitaldiak",
         modifier = modifier
     ) {
+        composable("ekitaldiak") {
+            ekitaldiGuztiak()
+        }
         composable("login") {
             Login(
                 onLoginSuccess = {
