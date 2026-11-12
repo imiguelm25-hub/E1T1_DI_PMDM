@@ -5,6 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
 import java.util.Date
+import com.example.e1t1_di.ekitaldiDatuak.DataEkitaldia
 
 @Serializable
 data class Ekitaldia(
@@ -16,12 +17,17 @@ data class Ekitaldia(
     // eventWhere
     // eventTimeTable
     // eventPrice String edo double?
-    @SerialName("documentName") val name: String? = "",
-    @SerialName("eventType") val mota: String? = "",
-    @SerialName("eventStartDate") val data: String? = "",
-    @SerialName("eventWhere") val lekua: String? = "",
-    @SerialName("eventTimeTable") val ordua: String? = "",
-    @SerialName("eventPrice") val prezioa: String? = null
-    ){
+    @SerialName("documentName")
+    val name: String? = "",
+    @SerialName("eventType")
+    val mota: String? = "",
+    @SerialName("eventStartDate")
+    val data: DataEkitaldia? = null,
+    @SerialName("eventWhere")
+    val lekua: String? = "",
+    @SerialName("eventTimeTable")
+    val ordua: String? = "",
+    @SerialName("eventPrice")
+    val prezioa: String? = null
+)
 
-}
