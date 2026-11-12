@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,7 +49,7 @@ import com.example.e1t1_di.ekitaldiDatuak.ekitaldiZerrenda
 import java.time.LocalDate
 
 @Composable
-fun ekitaldiGuztiak(){
+fun ekitaldiGuztiak(onBack: () -> Unit = {}){
     val context = LocalContext.current
     val ekitaldiak = remember { ekitaldiZerrenda().datuakKargatu(context)}
 
@@ -84,6 +85,7 @@ fun ekitaldiGuztiak(){
                     .padding(0.dp)
                     .width(46.8.dp)
                     .height(44.dp)
+                    .clickable { onBack() }
             )
 
             Row(

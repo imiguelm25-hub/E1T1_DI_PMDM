@@ -12,12 +12,9 @@ fun AppNabigazio (modifier: Modifier = Modifier){
 
     NavHost(
         navController = navController,
-        startDestination = "ekitaldiak",
+        startDestination = "login",
         modifier = modifier
     ) {
-        composable("ekitaldiak") {
-            ekitaldiGuztiak()
-        }
         composable("login") {
             Login(
                 onLoginSuccess = {
@@ -29,6 +26,11 @@ fun AppNabigazio (modifier: Modifier = Modifier){
             Menua(
                 onBack = { navController.popBackStack() },
                 onEkitaldiGuztiak = { navController.navigate("ekitaldiak") },
+            )
+        }
+        composable("ekitaldiak") {
+            ekitaldiGuztiak(
+                onBack = { navController.popBackStack() }
             )
         }
     }
