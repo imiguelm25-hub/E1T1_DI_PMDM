@@ -26,7 +26,10 @@ fun AppNabigazio (modifier: Modifier = Modifier){
             )
         }
         composable("menua") {
-            Menua(onBack = { navController.popBackStack() })
+            Menua(
+                onBack = { navController.popBackStack() },
+                onEkitaldiGuztiak = { navController.navigate("ekitaldiak") },
+            )
         }
     }
 }
