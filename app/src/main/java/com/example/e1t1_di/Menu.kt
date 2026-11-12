@@ -46,7 +46,6 @@ data class GomendatutakoEkitaldia(
 fun Menua(
     onBack: () -> Unit = {},
     onEkitaldiGuztiak: () -> Unit = {},
-    onIkusiGehiago: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val gomendatutakoEkitaldiak = listOf(
@@ -214,7 +213,6 @@ fun Menua(
                     izena = ekitaldia.izena,
                     ordua = ekitaldia.ordua,
                     kolorea = ekitaldia.kolorea,
-                    onIkusiGehiago = onIkusiGehiago
                 )
             }
         }
@@ -228,7 +226,6 @@ fun MenuEkitaldiTxartela(
     izena: String,
     ordua: String,
     kolorea: Color,
-    onIkusiGehiago: () -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(size = 25.dp),
