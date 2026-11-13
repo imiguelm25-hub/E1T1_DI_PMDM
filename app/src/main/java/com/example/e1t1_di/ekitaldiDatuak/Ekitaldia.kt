@@ -29,5 +29,8 @@ data class Ekitaldia(
     val ordua: String? = "",
     @SerialName("eventPrice")
     val prezioa: String? = null
-)
 
+) {
+    val prezioaTestua: String
+        get() = if (prezioa.isNullOrBlank()) "Doakoa" else prezioa
+}

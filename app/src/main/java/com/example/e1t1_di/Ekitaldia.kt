@@ -3,13 +3,15 @@ package com.example.e1t1_di
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -23,8 +25,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,111 +38,119 @@ import java.time.LocalDate
 @Composable
 fun Ekitaldi(ekitaldia: Ekitaldia) {
     Column(
+        Modifier
+            .width(412.dp)
+            .height(917.dp)
+            .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 50.dp))
+            .padding(start = 25.dp, top = 50.dp, end = 25.dp, bottom = 77.dp),
         verticalArrangement = Arrangement.spacedBy(31.dp, Alignment.Top),
-        modifier = Modifier
-            .padding(20.dp)
-    ) {
-    Row(
-        // Tituluaren errenkada nagusia (Seme 1)
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .width(362.dp)
-            .height(44.dp)
-    ) {
 
-        Image(
-            painter = painterResource(id = R.drawable.botoia),
-            contentDescription = "image description",
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .padding(0.dp)
-                .width(46.8.dp)
-                .height(44.dp)
-                //.clickable { onBack() }
-        )
-
+    ) {
+        //goiburua
         Row(
-            // Guztiak
-            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
+            // Tituluaren errenkada nagusia (Seme 1)
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .border(width = 3.dp, color = Color(0xFF222222),
-                    shape = RoundedCornerShape(size = 10.dp))
-                .width(120.dp)
-                .height(40.dp)
-                .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 10.dp))
-                .padding(start = 10.dp, top = 3.dp, end = 10.dp, bottom = 4.dp)
+                .width(362.dp)
+                .height(44.dp)
         ) {
 
-            Text(
-                // Textua
-                text = "EKITALDI",
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                    textAlign = TextAlign.Center
-                ),
-                modifier = Modifier.height(24.dp)
+            Image(
+                painter = painterResource(id = R.drawable.botoia),
+                contentDescription = "image description",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .padding(0.dp)
+                    .width(46.8.dp)
+                    .height(44.dp)
+                //.clickable { onBack() }
             )
 
+            Row(
+                // Guztiak
+                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .border(
+                        width = 3.dp, color = Color(0xFF222222),
+                        shape = RoundedCornerShape(size = 10.dp)
+                    )
+                    .width(120.dp)
+                    .height(40.dp)
+                    .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 10.dp))
+                    .padding(start = 10.dp, top = 3.dp, end = 10.dp, bottom = 4.dp)
+            ) {
+
+                Text(
+                    // Textua
+                    text = "EKITALDI",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight(700),
+                        color = Color(0xFF000000),
+                        textAlign = TextAlign.Center
+                    ),
+                    modifier = Modifier.height(24.dp)
+                )
+
+            }
+
+            Image(
+                // Profilaren logoa
+                painter = painterResource(id = R.drawable.profila),
+                contentDescription = "image description",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .padding(0.dp)
+                    .width(44.dp)
+                    .height(44.dp)
+            )
         }
-
-        Image(
-            // Profilaren logoa
-            painter = painterResource(id = R.drawable.profila),
-            contentDescription = "image description",
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .padding(0.dp)
-                .width(44.dp)
-                .height(44.dp)
-        )
-    }
-
+       //ekitaldiaren argazkia
         Image(
             // Profilaren logoa
             painter = painterResource(id = R.drawable.ekitaldi),
             contentDescription = "image description",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .border(width = 3.dp, color = Color(0xFF000000), shape = RoundedCornerShape(size = 30.dp))
-            .width(341.dp)
-            .height(230.dp)
-            .clip(RoundedCornerShape(30.dp))
+                .border(
+                    width = 3.dp,
+                    color = Color(0xFF000000),
+                    shape = RoundedCornerShape(size = 30.dp)
+                )
+                .width(341.dp)
+                .height(230.dp)
+                .clip(RoundedCornerShape(30.dp))
         )
 
         Text(
-            modifier = Modifier
-                .width(274.dp)
-                .height(21.dp),
+            modifier = Modifier.fillMaxWidth(),
             text = "${ekitaldia.name}",
             style = TextStyle(
                 fontSize = 17.sp,
                 //fontFamily = FontFamily(Font(R.font.inter)),
                 fontWeight = FontWeight(700),
                 color = Color(0xFF1A1A1A),
+                textAlign = TextAlign.Center
             )
         )
 
         Column(
-            modifier = Modifier
-                .padding(0.dp)
-                .width(250.dp)
-                .height(146.dp)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             //Data
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(25.dp)
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Box(
-
+                    contentAlignment = Alignment.Center
                 ) {
                     Image(
                         // Profilaren logoa
-                        painter = painterResource(id = R.drawable.ellipse_7),
+                        painter = painterResource(id = R.drawable.ellipse),
                         contentDescription = "image description",
                         contentScale = ContentScale.Fit,
                         modifier = Modifier
@@ -150,6 +158,14 @@ fun Ekitaldi(ekitaldia: Ekitaldia) {
                             .width(44.dp)
                             .height(44.dp)
                     )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.group),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.size(22.dp)
+                    )
+
                 }
                 val hilabeteak = listOf(
                     "Urtarrilak",
@@ -168,7 +184,7 @@ fun Ekitaldi(ekitaldia: Ekitaldia) {
                 val data1 = ekitaldia.data?.data
 
                 val dataAmaiera = data1?.let {
-                    LocalDate.parse(it.substring(0,10))
+                    LocalDate.parse(it.substring(0, 10))
                 }
 
                 val urtea = dataAmaiera?.year
@@ -176,7 +192,7 @@ fun Ekitaldi(ekitaldia: Ekitaldia) {
                 val eguna = dataAmaiera?.dayOfMonth
 
                 val hilabetea = hilaZbk?.let {
-                    hilabeteak[it -1]
+                    hilabeteak[it - 1]
                 }
 
 
@@ -189,14 +205,38 @@ fun Ekitaldi(ekitaldia: Ekitaldia) {
                         color = Color(0xFF000000),
                     )
                 )
-                }
-
             }
 
+
             //Ordua
-            Row() {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        // Profilaren logoa
+                        painter = painterResource(id = R.drawable.ellipse),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .padding(0.dp)
+                            .width(44.dp)
+                            .height(44.dp)
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.ordua),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.size(22.dp)
+                    )
+                }
+
                 Text(
-                    text = "23:00",
+                    text = "${ekitaldia.ordua}",
                     style = TextStyle(
                         fontSize = 14.sp,
                         //fontFamily = FontFamily(Font(R.font.inter)),
@@ -207,19 +247,92 @@ fun Ekitaldi(ekitaldia: Ekitaldia) {
             }
 
             //Lekua
-            Row() { }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        // Profilaren logoa
+                        painter = painterResource(id = R.drawable.ellipse),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .padding(0.dp)
+                            .width(44.dp)
+                            .height(44.dp)
+                    )
+
+                    Image(
+                        painter = painterResource(id = R.drawable.kokapena),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.size(22.dp)
+                    )
+                }
+
+                Text(
+                    text = "${ekitaldia.lekua}",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        //fontFamily = FontFamily(Font(R.font.inter)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF1A1A1A),
+                    )
+                )
+            }
 
             //Prezioa
-            Row() { }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        // Profilaren logoa
+                        painter = painterResource(id = R.drawable.ellipse),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .padding(0.dp)
+                            .width(44.dp)
+                            .height(44.dp)
+                    )
+                    Text(
+                        text = "€",
+                        style = TextStyle(
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight(700),
+                            color = Color(0xFF1A1A1A)
+                        ),
+                        modifier = Modifier.offset(x = (-2).dp)
+                    )
+                }
+
+                Text(
+                    text = "${ekitaldia.prezioaTestua}",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        //fontFamily = FontFamily(Font(R.font.inter)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF1A1A1A),
+                    )
+                )
+            }
         }
+    }
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun EkitaldiPreview(){
+fun EkitaldiPreview() {
     val context = LocalContext.current
-    val ekitaldiak = remember { ekitaldiZerrenda().datuakKargatu(context)}
+    val ekitaldiak = remember { ekitaldiZerrenda().datuakKargatu(context) }
     val ekitaldia = ekitaldiak[0]
 
     Ekitaldi(ekitaldia)
