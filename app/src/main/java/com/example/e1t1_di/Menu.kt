@@ -54,21 +54,21 @@ fun Menua(
             eguna = "20",
             izena = "Su Ta Gar + Ostrich Wedding",
             ordua = "23:00 · Doan",
-            kolorea = Color(0xFF9BC899)
+            kolorea = Color(0xFFFFB4A2)
         ),
         GomendatutakoEkitaldia(
             hilabetea = "MAIATZAK",
-            eguna = "10",
-            izena = "Clown Jaialdia: Into the wild",
+            eguna = "4",
+            izena = "Dantzari Txiki Eguna 2024",
             ordua = "19:00 · Doan",
-            kolorea = Color(0xFF5FA3A8)
+            kolorea = Color(0xFFBDB2FF)
         ),
         GomendatutakoEkitaldia(
             hilabetea = "UZTAILAK",
             eguna = "1",
             izena = "CLOWN tailerra (Bilbao)",
             ordua = "09:00-14:00",
-            kolorea = Color(0xFF9BC899)
+            kolorea = Color(0xFF9BC89B)
         )
     )
 

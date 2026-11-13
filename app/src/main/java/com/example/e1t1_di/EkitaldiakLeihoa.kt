@@ -152,7 +152,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
             ) {
                 Text(
                     text = "Antzerkia",
-                    fontSize = 11.sp,
+                    fontSize = 15.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center
                 )
@@ -173,7 +173,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
                         Color(0xFFFFFBEA)
                 )
             ) {
-                Text("Dantza", fontSize = 11.sp, color = Color.Black)
+                Text("Dantza", fontSize = 15.sp, color = Color.Black)
             }
 
             Button(
@@ -191,7 +191,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
                         Color(0xFFFFFBEA)
                 )
             ) {
-                Text("Hitzaldia", fontSize = 11.sp, color = Color.Black)
+                Text("Hitzaldia", fontSize = 15.sp, color = Color.Black)
             }
 
             Button(
@@ -209,7 +209,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
                         Color(0xFFFFFBEA)
                 )
             ) {
-                Text("Kontzertu", fontSize = 11.sp, color = Color.Black)
+                Text("Kontzertu", fontSize = 15.sp, color = Color.Black)
             }
         }
 
@@ -316,7 +316,7 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
                 ) {
                     Text(
                         text = "${hilabetea}",
-                        fontSize = 14.sp,
+                        fontSize = 15.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
@@ -362,6 +362,7 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
                         horizontal = 32.dp,
                         vertical = 0.dp
                     ),
+                    border = BorderStroke(2.dp, Color.Black),
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = kolorea,
