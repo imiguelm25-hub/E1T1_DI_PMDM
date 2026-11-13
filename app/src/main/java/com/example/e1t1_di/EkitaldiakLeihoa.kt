@@ -1,5 +1,6 @@
 package com.example.e1t1_di
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -46,24 +47,40 @@ import com.example.e1t1_di.ekitaldiDatuak.EkitaldiZerrenda
 import java.time.LocalDate
 
 @Composable
-fun ekitaldiGuztiak(onBack: () -> Unit = {}){
+fun ekitaldiGuztiak(onBack: () -> Unit = {}) {
     val context = LocalContext.current
-    val ekitaldiak = remember { EkitaldiZerrenda().datuakKargatu(context)}
+    val ekitaldiak = remember { EkitaldiZerrenda().datuakKargatu(context) }
 
-    var motaAukeratua by remember {
-        mutableStateOf("Antzerkia")
+    var motaAukeratua by remember { mutableStateOf("Antzerkia") }
+    var ekitaldiAukeratua by remember { mutableStateOf<Ekitaldia?>(null) }
+
+    val aukeratua = ekitaldiAukeratua
+    if (aukeratua != null) {
+        BackHandler { ekitaldiAukeratua = null }
+        Ekitaldi(
+            ekitaldia = aukeratua,
+            onBack = { ekitaldiAukeratua = null }
+        )
+        return
     }
-
 
     Column(
         // Zutabe nagusia (Hiru seme nagusi)
         verticalArrangement = Arrangement.spacedBy(31.dp, Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.width(412.dp).height(917.dp).background(color = Color(0xFFFFFBEA),
-            shape = RoundedCornerShape(size = 50.dp)).padding(start = 25.dp, top = 50.dp, end = 25.dp,
-            bottom = 110.dp),
+        modifier = Modifier
+            .width(412.dp)
+            .height(917.dp)
+            .background(
+                color = Color(0xFFFFFBEA),
+                shape = RoundedCornerShape(size = 50.dp)
+            )
+            .padding(
+                start = 25.dp, top = 50.dp, end = 25.dp,
+                bottom = 110.dp
+            ),
 
-    ) {
+        ) {
 
         Row(
             // Tituluaren errenkada nagusia (Seme 1)
@@ -90,12 +107,14 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
                 horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .border(width = 3.dp, color = Color(0xFF222222),
-                        shape = RoundedCornerShape(size = 10.dp))
-                .width(120.dp)
-                .height(40.dp)
-                .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 10.dp))
-                .padding(start = 10.dp, top = 3.dp, end = 10.dp, bottom = 4.dp)
+                    .border(
+                        width = 3.dp, color = Color(0xFF222222),
+                        shape = RoundedCornerShape(size = 10.dp)
+                    )
+                    .width(120.dp)
+                    .height(40.dp)
+                    .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 10.dp))
+                    .padding(start = 10.dp, top = 3.dp, end = 10.dp, bottom = 4.dp)
             ) {
 
                 Text(
@@ -133,7 +152,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
         ) {
 
             Button(
-                onClick = { motaAukeratua = "Antzerkia"},
+                onClick = { motaAukeratua = "Antzerkia" },
                 modifier = Modifier
                     .weight(1f)
                     .height(42.dp),
@@ -156,7 +175,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
             }
 
             Button(
-                onClick = {motaAukeratua = "Dantza"},
+                onClick = { motaAukeratua = "Dantza" },
                 modifier = Modifier
                     .weight(1f)
                     .height(42.dp),
@@ -174,7 +193,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
             }
 
             Button(
-                onClick = { motaAukeratua = "Hitzaldia"},
+                onClick = { motaAukeratua = "Hitzaldia" },
                 modifier = Modifier
                     .weight(1f)
                     .height(42.dp),
@@ -192,7 +211,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
             }
 
             Button(
-                onClick = { motaAukeratua = "Kontzertua"},
+                onClick = { motaAukeratua = "Kontzertua" },
                 modifier = Modifier
                     .weight(1f)
                     .height(42.dp),
@@ -211,9 +230,6 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
         }
 
 
-
-
-
         val ekitaldiIragaziak = if (motaAukeratua == "Guztiak") {
             ekitaldiak
         } else {
@@ -225,14 +241,21 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {
-            items(ekitaldiIragaziak){
-                ekitaldia -> ekitaldiCard(ekitaldia)
+            items(ekitaldiIragaziak) { ekitaldia ->
+                ekitaldiCard(
+                    ekitaldia = ekitaldia,
+                    onIkusiGehiagoClick = { ekitaldiAukeratua = it }
+                )
             }
         }
     }
 }
+
 @Composable
-fun ekitaldiCard(ekitaldia : Ekitaldia){
+fun ekitaldiCard(
+    ekitaldia: Ekitaldia,
+    onIkusiGehiagoClick: (Ekitaldia) -> Unit = {}
+) {
 
     val kolorea = when (ekitaldia.mota) {
         "Antzerkia" -> Color(0xFF9BC89B)
@@ -259,14 +282,14 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
     val data1 = ekitaldia.data?.data
 
     val dataAmaiera = data1?.let {
-     LocalDate.parse(it.substring(0,10))
+        LocalDate.parse(it.substring(0, 10))
     }
 
     val hilaZbk = dataAmaiera?.monthValue
     val eguna = dataAmaiera?.dayOfMonth
 
     val hilabetea = hilaZbk?.let {
-        hilabeteak[it -1]
+        hilabeteak[it - 1]
     }
 
     Card(
@@ -279,14 +302,14 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
             .fillMaxWidth()
             .height(112.dp)
             .padding(horizontal = 8.dp, vertical = 4.dp)
-    ){
+    ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(9.dp)
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .width(94.dp)
@@ -325,7 +348,7 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
 
             Column(
                 modifier = Modifier.weight(1f),
-               horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
 
@@ -350,7 +373,9 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
 
                 // Ikusi Gehiago botoia
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onIkusiGehiagoClick(ekitaldia)
+                    },
                     contentPadding = PaddingValues(
                         horizontal = 32.dp,
                         vertical = 0.dp
@@ -360,7 +385,7 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
                     colors = ButtonDefaults.buttonColors(
                         containerColor = kolorea,
                         contentColor = Color.Black
-                    ),modifier = Modifier.padding(horizontal = 15.dp)
+                    ), modifier = Modifier.padding(horizontal = 15.dp)
                 ) {
                     Text(
                         text = "IKUSI GEHIAGO",
@@ -376,7 +401,7 @@ fun ekitaldiCard(ekitaldia : Ekitaldia){
 
 @Preview(showBackground = true)
 @Composable
-fun ekitaldiPreview(){
+fun ekitaldiPreview() {
     ekitaldiGuztiak()
 }
 

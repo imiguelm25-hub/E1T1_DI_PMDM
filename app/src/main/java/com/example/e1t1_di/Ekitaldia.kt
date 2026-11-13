@@ -50,7 +50,7 @@ import java.time.LocalDate
 
 
 @Composable
-fun Ekitaldi(ekitaldia: Ekitaldia) {
+fun Ekitaldi(ekitaldia: Ekitaldia, onBack: () -> Unit = {}) {
 
     var izenAbizenak by remember { mutableStateOf("") }
     var telefonoa by remember { mutableStateOf("") }
@@ -436,5 +436,5 @@ fun EkitaldiPreview() {
     val ekitaldiak = remember { EkitaldiZerrenda().datuakKargatu(context) }
     val ekitaldia = ekitaldiak[0]
 
-    Ekitaldi(ekitaldia)
+    Ekitaldi(ekitaldia,)
 }

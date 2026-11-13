@@ -62,8 +62,8 @@ fun Login(onLoginSuccess: () -> Unit, modifier: Modifier = Modifier) {
                 contentDescription = "image description",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .width(320.dp)
-                    .height(224.dp)
+                    .width(156.dp)
+                    .height(90.dp)
             )
 
             //Saioa hasi
