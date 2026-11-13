@@ -232,11 +232,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}){
                 ekitaldia -> ekitaldiCard(ekitaldia)
             }
         }
-
-
-
     }
-
 }
 @Composable
 fun ekitaldiCard(ekitaldia : Ekitaldia){
