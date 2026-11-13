@@ -1,5 +1,6 @@
 package com.example.e1t1_di
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -7,16 +8,27 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,23 +38,30 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.e1t1_di.ekitaldiDatuak.Ekitaldia
-import com.example.e1t1_di.ekitaldiDatuak.ekitaldiZerrenda
+import com.example.e1t1_di.ekitaldiDatuak.Izenematea
+import com.example.e1t1_di.ekitaldiDatuak.EkitaldiZerrenda
 import java.time.LocalDate
 
 
 @Composable
 fun Ekitaldi(ekitaldia: Ekitaldia) {
+
+    var izenAbizenak by remember { mutableStateOf("") }
+    var telefonoa by remember { mutableStateOf("") }
+    val izenemateak = remember { mutableStateListOf<Izenematea>() }
+
     Column(
         Modifier
-            .width(412.dp)
-            .height(917.dp)
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 50.dp))
-            .padding(start = 25.dp, top = 50.dp, end = 25.dp, bottom = 77.dp),
+            .padding(start = 25.dp, top = 50.dp, end = 25.dp, bottom = 40.dp),
         verticalArrangement = Arrangement.spacedBy(31.dp, Alignment.Top),
 
     ) {
@@ -324,15 +343,97 @@ fun Ekitaldi(ekitaldia: Ekitaldia) {
                 )
             }
         }
+
+        Text(
+            text = "EKITALDIAN IZENA EMAN",
+            style = TextStyle(
+                fontSize = 20.sp,
+                //fontFamily = FontFamily(Font(R.font.inter)),
+                fontWeight = FontWeight(700),
+                color = Color(0xFF1A1A1A),
+                textAlign = TextAlign.Center
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(19.dp, Alignment.Top),
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            //Izena eta abizena
+            OutlinedTextField(
+                value = izenAbizenak,
+                onValueChange = { izenAbizenak = it },
+                singleLine = true,
+                shape = RoundedCornerShape(12.dp),
+                placeholder = {
+                    Text(
+                        text = "Izena eta Abizena",
+                        fontSize = 14.sp,
+                        color = Color(0xFF888888)
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(54.dp)
+                    .border(2.5.dp, Color(0xFF000000), RoundedCornerShape(12.dp))
+            )
+
+            //Telefonoa
+            OutlinedTextField(
+                value = telefonoa,
+                onValueChange = { telefonoa = it },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                shape = RoundedCornerShape(12.dp),
+                placeholder = {
+                    Text(
+                        text = "Telefonoa",
+                        fontSize = 14.sp,
+                        color = Color(0xFF888888)
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(54.dp)
+                    .border(2.5.dp, Color(0xFF000000), RoundedCornerShape(12.dp))
+            )
+
+            //Izena eman botoia
+            Button(
+                onClick = {
+                    if (izenAbizenak.isNotBlank() && telefonoa.isNotBlank()) {
+                        izenemateak.add(Izenematea(izenAbizenak.trim(), telefonoa.trim()))
+                        izenAbizenak = ""
+                        telefonoa = ""
+                    }
+                },
+                shape = RoundedCornerShape(30.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5E7F5C)),
+                border = BorderStroke(3.dp, Color.Black),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp)
+            ) {
+                Text(
+                    text = "IZENA EMAN",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFFFFFDF3),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
+        }
     }
-}
 
 
 @Preview(showBackground = true)
 @Composable
 fun EkitaldiPreview() {
     val context = LocalContext.current
-    val ekitaldiak = remember { ekitaldiZerrenda().datuakKargatu(context) }
+    val ekitaldiak = remember { EkitaldiZerrenda().datuakKargatu(context) }
     val ekitaldia = ekitaldiak[0]
 
     Ekitaldi(ekitaldia)

@@ -5,7 +5,7 @@ import kotlin.collections.emptyList
 import kotlinx.serialization.json.Json
 
 
-class ekitaldiZerrenda {
+class EkitaldiZerrenda {
     fun datuakKargatu(context : Context) : List<Ekitaldia>{
         return try {
             val jsonString = context.assets.open("kulturEkitaldiak.json").
