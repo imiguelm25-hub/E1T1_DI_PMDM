@@ -65,67 +65,9 @@ fun Ekitaldi(ekitaldia: Ekitaldia, onBack: () -> Unit = {}) {
         verticalArrangement = Arrangement.spacedBy(31.dp, Alignment.Top),
 
     ) {
-        //goiburua
-        Row(
-            // Tituluaren errenkada nagusia (Seme 1)
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .width(362.dp)
-                .height(44.dp)
-        ) {
 
-            Image(
-                painter = painterResource(id = R.drawable.botoia),
-                contentDescription = "image description",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .padding(0.dp)
-                    .width(46.8.dp)
-                    .height(44.dp)
-                //.clickable { onBack() }
-            )
+        Goiburua(izenburua = "EKITALDI", onBack = onBack)
 
-            Row(
-                // Guztiak
-                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .border(
-                        width = 3.dp, color = Color(0xFF222222),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    )
-                    .width(120.dp)
-                    .height(40.dp)
-                    .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 10.dp))
-                    .padding(start = 10.dp, top = 3.dp, end = 10.dp, bottom = 4.dp)
-            ) {
-
-                Text(
-                    // Textua
-                    text = "EKITALDI",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight(700),
-                        color = Color(0xFF000000),
-                        textAlign = TextAlign.Center
-                    ),
-                    modifier = Modifier.height(24.dp)
-                )
-
-            }
-
-            Image(
-                // Profilaren logoa
-                painter = painterResource(id = R.drawable.profila),
-                contentDescription = "image description",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .padding(0.dp)
-                    .width(44.dp)
-                    .height(44.dp)
-            )
-        }
        //ekitaldiaren argazkia
         Image(
             // Profilaren logoa
@@ -187,25 +129,23 @@ fun Ekitaldi(ekitaldia: Ekitaldia, onBack: () -> Unit = {}) {
 
                 }
                 val hilabeteak = listOf(
-                    "Urtarrilak",
-                    "Otsailak",
-                    "Martxoak",
-                    "Apirilak",
-                    "Maiatzak",
-                    "Ekainak",
-                    "Uztailak",
-                    "Abuztuak",
-                    "Irailak",
-                    "Urriak",
-                    "Azaroak",
-                    "Abenduak"
+                    "Urtarrila",
+                    "Otsaila",
+                    "Martxoa",
+                    "Apirila",
+                    "Maiatza",
+                    "Ekaina",
+                    "Uztaila",
+                    "Abuztua",
+                    "Iraila",
+                    "Urria",
+                    "Azaroa",
+                    "Abendua"
                 )
                 val data1 = ekitaldia.data?.data
-
                 val dataAmaiera = data1?.let {
                     LocalDate.parse(it.substring(0, 10))
                 }
-
                 val urtea = dataAmaiera?.year
                 val hilaZbk = dataAmaiera?.monthValue
                 val eguna = dataAmaiera?.dayOfMonth
@@ -213,10 +153,8 @@ fun Ekitaldi(ekitaldia: Ekitaldia, onBack: () -> Unit = {}) {
                 val hilabetea = hilaZbk?.let {
                     hilabeteak[it - 1]
                 }
-
-
                 Text(
-                    text = "${urtea}ko ${hilabetea} ${eguna}a",
+                    text = "${urtea}ko ${hilabetea}ren ${eguna}a",
                     style = TextStyle(
                         fontSize = 14.sp,
                         //fontFamily = FontFamily(Font(R.font.inter)),
@@ -428,7 +366,6 @@ fun Ekitaldi(ekitaldia: Ekitaldia, onBack: () -> Unit = {}) {
         }
     }
 
-
 @Preview(showBackground = true)
 @Composable
 fun EkitaldiPreview() {
@@ -436,5 +373,5 @@ fun EkitaldiPreview() {
     val ekitaldiak = remember { EkitaldiZerrenda().datuakKargatu(context) }
     val ekitaldia = ekitaldiak[0]
 
-    Ekitaldi(ekitaldia,)
+    Ekitaldi(ekitaldia)
 }

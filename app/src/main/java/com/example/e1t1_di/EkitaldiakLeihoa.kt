@@ -2,10 +2,8 @@ package com.example.e1t1_di
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,10 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -82,66 +77,7 @@ fun ekitaldiGuztiak(onBack: () -> Unit = {}) {
 
         ) {
 
-        Row(
-            // Tituluaren errenkada nagusia (Seme 1)
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .width(362.dp)
-                .height(44.dp)
-        ) {
-
-            Image(
-                painter = painterResource(id = R.drawable.botoia),
-                contentDescription = "image description",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .padding(0.dp)
-                    .width(46.8.dp)
-                    .height(44.dp)
-                    .clickable { onBack() }
-            )
-
-            Row(
-                // Guztiak
-                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .border(
-                        width = 3.dp, color = Color(0xFF222222),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    )
-                    .width(120.dp)
-                    .height(40.dp)
-                    .background(color = Color(0xFFFFFBEA), shape = RoundedCornerShape(size = 10.dp))
-                    .padding(start = 10.dp, top = 3.dp, end = 10.dp, bottom = 4.dp)
-            ) {
-
-                Text(
-                    // Textua
-                    text = "GUZTIAK",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight(700),
-                        color = Color(0xFF000000),
-                        textAlign = TextAlign.Center
-                    ),
-                    modifier = Modifier.height(24.dp)
-                )
-
-            }
-
-            Image(
-                // Profilaren logoa
-                painter = painterResource(id = R.drawable.profila),
-                contentDescription = "image description",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .padding(0.dp)
-                    .width(44.dp)
-                    .height(44.dp)
-            )
-        }
+        Goiburua(izenburua = "GUZTIAK", onBack = onBack)
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -364,7 +300,7 @@ fun ekitaldiCard(
 
                 // Ordua eta prezioa
                 Text(
-                    text = "${ekitaldia.ordua ?: ""}  |  ${ekitaldia.prezioa ?: "Doan"}",
+                    text = "${ekitaldia.ordua ?: ""}  |  ${ekitaldia.prezioaTestua ?: "Doan"}",
                     fontSize = 12.sp,
                     color = Color.DarkGray,
                     maxLines = 1,
@@ -404,5 +340,3 @@ fun ekitaldiCard(
 fun ekitaldiPreview() {
     ekitaldiGuztiak()
 }
-
-
